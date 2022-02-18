@@ -1,0 +1,11 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int n,P,S;
+    while (cin >> n) 
+    {
+        S = n*n; // считаем площадь квадрата
+        cout << P << " " << S << "\n";
+    }
+    return 0;
+}
