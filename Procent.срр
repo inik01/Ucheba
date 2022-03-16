@@ -1,0 +1,77 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+int MonthDays[12];
+int February4 = 29;
+
+int YearDays = 365;
+int YearDays4 = 366;
+
+
+int Contribution(double amount, double principal, double rate, int period) {
+    double currentSum = amount;
+    int Year = 2;
+    int Month = 3;
+    int Time = 0;
+    double YearD = 0;
+
+    while (currentSum < principal || Time % period != 0) {
+        if (Year == 4) {
+            YearD = YearDays4;
+            MonthDays[1] = February4;
+        }
+        else {
+            YearD = YearDays;
+            MonthDays[1] = 28;
+        }
+
+        currentSum = currentSum + currentSum * (rate / 100) * MonthDays[Month - 1] / YearD;
+
+        if (Year == 4)
+            Year = 1;
+        else
+            Year++;
+
+        if (Month == 12)
+            Month = 1;
+        else
+            Month++;
+
+        Time++;
+    }
+
+    return Time;
+};
+
+int main()
+{
+
+    setlocale(LC_ALL, "");
+
+    MonthDays[1] = 28;
+    MonthDays[0] = MonthDays[2] = MonthDays[4] = MonthDays[6] = MonthDays[7] = MonthDays[9] = MonthDays[11] = 31;
+    MonthDays[3] = MonthDays[5] = MonthDays[8] = MonthDays[10] = 30;
+
+    double amount, principal, rate1, rate2;
+    int period1, period2;
+
+    cin >> amount;
+    cin >> principal;
+    cin >> rate1;
+    cin >> rate2;
+    cin >> period1;
+    cin >> period2;
+
+    if (amount <= 0 || principal <= 0 || amount >= principal || rate1 <= 0 || rate1 >= 100 || rate2 <= 0 || rate2 >= 100)
+        cout << "ХА-ХА, давай по-новой, Миша";
+
+    if (Contribution(amount, principal, rate1, period1) <= Contribution(amount, principal, rate2, period2))
+        cout << "Воспользуйтесь 1 вкладом, забрать деньги можно будет через " << Contribution(amount, principal, rate1, period1) / 12 << " лет и " << Contribution(amount, principal, rate1, period1) % 12 << " месяцев";
+    else
+        cout << "Воспользуйтесь 2 вкладом, забрать деньги можно будет через " << Contribution(amount, principal, rate2, period2) / 12 << " лет и " << Contribution(amount, principal, rate2, period2) % 12 << " месяцев";
+
+    return 0;
+}
