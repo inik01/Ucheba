@@ -66,7 +66,7 @@ int main()
     cin >> period2;
 
     if (amount <= 0 || principal <= 0 || amount >= principal || rate1 <= 0 || rate1 >= 100 || rate2 <= 0 || rate2 >= 100)
-        cout << "Данные некорректны";
+        cout << "Данные некорректны.";
 
     if (Contribution(amount, principal, rate1, period1) <= Contribution(amount, principal, rate2, period2))
         cout << "Воспользуйтесь 1 вкладом, забрать деньги можно будет через " << Contribution(amount, principal, rate1, period1) / 12 << " лет и " << Contribution(amount, principal, rate1, period1) % 12 << " месяцев";
